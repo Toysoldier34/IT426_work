@@ -1,0 +1,140 @@
+package switchingscenes;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class StoryBook extends Application{
+
+
+    public static final int WIN_SIZE = 300;
+
+    private Stage stage;
+    private String[] headers = {"Part 1", "Part 2", "Part 3"};
+    private String[] bodies = {"Part 1 body", "Part 2 body", "Part 3 body End"};
+
+
+    public void start(Stage stage) {
+        //Record the stage for later use
+        this.stage = stage;
+
+        //perform a few setup tasks
+        stage.setTitle("Welcome to Java FX");
+        stage.setScene(getWaitScreen());
+        stage.show();
+
+        //wait a few seconds to simulate load times, then display our story
+        /*
+        Anonymous inner class
+         */
+        KeyFrame frame = new KeyFrame(Duration.millis(3000), event -> {
+            //change our screen elements
+            stage.setScene(getStoryScreen1());
+        });
+
+
+        /*
+        //wait a few seconds to simulate load times, then display our story
+        KeyFrame frame = new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
+
+            //Anonymous inner class
+
+        @Override
+        public void handle(ActionEvent event) {
+            //change our screen elements
+            stage.setScene(getStoryScreen());
+        }
+        });
+         */
+        Timeline animation = new Timeline(frame);
+        animation.play();
+    }
+
+
+    public Scene getWaitScreen() {
+        //show a progress indicator and a message
+        ProgressIndicator progress = new ProgressIndicator();
+        Text message = new Text("Please wait...");
+
+        return getSceneWithVBox(progress, message);
+    }
+
+
+    public Scene getSceneWithVBox(Node... elements) {
+        VBox panel = new VBox();
+        panel.getChildren().addAll(elements);
+
+        return new Scene(panel, WIN_SIZE, WIN_SIZE);
+    }
+
+
+    public Scene getStoryScreen(int index) {
+
+        Text header = new Text(headers[index]);
+        Text body = new Text(bodies[index]);
+
+        if (index != headers.length - 1) {
+            //send the user to the next screen if they click the button
+            Button button = new Button("Next");
+            button.setOnAction(event -> {
+                stage.setScene(getStoryScreen(index + 1));
+            });
+            return getSceneWithVBox(header, body, button);
+
+        }
+        return getSceneWithVBox(header, body);
+    }
+
+/*
+    public Scene getStoryScreen1() {
+        VBox panel = new VBox();
+
+        Text header = new Text("Part #1");
+        Text body = new Text("First filler body text");
+        Button button = new Button("Next");
+
+        //send the user to the next screen if they click the button
+        button.setOnAction(event -> { stage.setScene(getStoryScreen2()); });
+
+        panel.getChildren().addAll(header, body, button);
+
+        return getSceneWithVBox(progress, message, button);
+
+    }
+
+    public Scene getStoryScreen2() {
+        Text header = new Text("Part #1");
+        Text body = new Text("More filler text");
+        Button button = new Button("Next");
+
+        //send the user to the next screen if they click the button
+        button.setOnAction(event -> { stage.setScene(getStoryScreen3()); });
+
+
+        return getSceneWithVBox(header, body, button);
+
+    }
+
+    public Scene getStoryScreen3() {
+        Text header = new Text("Part #1");
+        Text body = new Text("Filler body text again, The End");
+
+        return getSceneWithVBox(header, body);
+    }
+
+*/
+
+
+
+
+}
