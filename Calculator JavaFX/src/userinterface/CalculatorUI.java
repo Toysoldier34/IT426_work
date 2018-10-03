@@ -1,4 +1,4 @@
-package ui;
+package userinterface;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -10,10 +10,14 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * This class provides a basic UI for a calculator.
+ *
+ * @author Tony Thompson
+ * @version 1.0
+ */
 public class CalculatorUI extends Application{
 
-
-    private static final int NUM_COLS = 4;
     private static final int TOTAL_COLS = 4;
     private static final int WIN_WIDTH = 200;
     private static final int WIN_HEIGHT = 225;
@@ -102,7 +106,9 @@ public class CalculatorUI extends Application{
     private void setButtonSize(GridPane panel, Button button, int buttonPositionNum) {
         int buttonSize = BUTTON_SMALL;
         if (button != null) {  //skips large button parts
-            if (button.getText().equals("Enter")) buttonSize = 2;
+            if (button.getText().equals("Enter")) {
+                buttonSize = 2;
+            }
             addButtonToPanel(panel, button, buttonPositionNum, buttonSize, BUTTON_SMALL);
         }
     }
