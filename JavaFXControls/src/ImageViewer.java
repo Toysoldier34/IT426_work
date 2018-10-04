@@ -27,7 +27,7 @@ public class ImageViewer extends Application
     public Scene assembleScene(String name)
     {
         VBox mainPanel = new VBox();
-        mainPanel.getChildren().addAll(radioButtons());
+        mainPanel.getChildren().addAll(radioButtons().myImageView);
         return new Scene(mainPanel, 600, 600);
     }
 
@@ -56,7 +56,6 @@ public class ImageViewer extends Application
         butts(button3);
         butts(button4);
 
-        panel.getChildren().addAll(myImageView);
 
         return panel;
     }
