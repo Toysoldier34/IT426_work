@@ -51,25 +51,6 @@ public class ImageViewer extends Application
         panel.getChildren().addAll(button1,button2,button3,button4);
 
 
-        button1.selectedProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> {
-            assembleScene(button1.getText());
-        });
-        /*
-        button1.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
-                    Image image = new Image(new File("images/bear.jpg").toURI().toURL().toString(), true);
-                    myImageView.setImageString(image);
-                }
-                catch(Exception MalformedURLException){
-                    System.out.println("Wrong url");
-                }
-            }
-        });
-*/
-
         butts(button1);
         butts(button2);
         butts(button3);
@@ -88,12 +69,6 @@ public class ImageViewer extends Application
 
 
         return image;
-    }
-
-    private void imageView(String file){
-        //Image image = setImage2(file);
-        //myImageView.setImageString(image);
-
     }
 
 
