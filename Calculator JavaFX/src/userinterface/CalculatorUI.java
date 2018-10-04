@@ -18,14 +18,15 @@ import javafx.stage.Stage;
  */
 public class CalculatorUI extends Application{
 
+    private static final int SCALE = 1;
     private static final int TOTAL_COLS = 4;
-    private static final int WIN_WIDTH = 200;
-    private static final int WIN_HEIGHT = 225;
-    private static final int H_GAP = 10;
-    private static final int V_GAP = 10;
-    private static final int PADDING = 25;
+    private static final int WIN_WIDTH = 200 * SCALE;
+    private static final int WIN_HEIGHT = 225 * SCALE;
+    private static final int H_GAP = 10 * SCALE;
+    private static final int V_GAP = 10 * SCALE;
+    private static final int PADDING = 25 * SCALE;
     private static final int BUTTON_SMALL = 1;
-    private static final int COL_WIDTH = 30;
+    private static final int COL_WIDTH = 30 * SCALE;
     private static final String[] BUTTON_LABELS = new String[]{
             "7", "8", "9", "+",
             "4", "5", "6", "-",
@@ -83,7 +84,7 @@ public class CalculatorUI extends Application{
     }
 
     //Create Text Display
-    private void createTextArea(GridPane panel) {
+    private void createTextField(GridPane panel) {
         TextField field = new TextField();
         panel.add(field, 0, 4, 4, 1);
     }
@@ -94,7 +95,7 @@ public class CalculatorUI extends Application{
         for (int i = 0; i < BUTTON_LABELS.length; i++) {
             setButtonSize(panel, newButton(BUTTON_LABELS[i]), i);
         }
-        createTextArea(panel);
+        createTextField(panel);
     }
 
     //Create a new Button
@@ -102,7 +103,7 @@ public class CalculatorUI extends Application{
         return (text != null) ? new Button(""+text) : null;
     }
 
-    //calls add after determining if size change is needed
+    //Calls add after determining if size change is needed
     private void setButtonSize(GridPane panel, Button button, int buttonPositionNum) {
         int buttonSize = BUTTON_SMALL;
         if (button != null) {  //skips large button parts
