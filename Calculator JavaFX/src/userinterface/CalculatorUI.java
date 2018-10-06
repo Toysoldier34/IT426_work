@@ -1,10 +1,13 @@
 package userinterface;
 
+import calculator.Calculator;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -63,6 +66,8 @@ public class CalculatorUI extends Application{
         setPanelStyle(panel);
         columnConstraints(panel);
         createAllButtons(panel);
+        createTextField(panel);
+        createTextHint(panel);
         return new Scene(panel, WIN_WIDTH, WIN_HEIGHT);
     }
 
@@ -71,22 +76,30 @@ public class CalculatorUI extends Application{
         panel.setHgap(H_GAP);
         panel.setVgap(V_GAP);
         panel.setPadding(new Insets(PADDING));
+        panel.getStylesheets().add("userinterface/CalculatorStyles.css");
         //panel.setGridLinesVisible(true);
     }
 
     //Column Constraints
     private void columnConstraints(GridPane panel) {
         ObservableList<ColumnConstraints> columns = panel.getColumnConstraints();
-        for (int i = 0; i < TOTAL_COLS; i++)
-        {
+        for (int i = 0; i < TOTAL_COLS; i++) {
             columns.add(new ColumnConstraints(COL_WIDTH));
         }
     }
 
     //Create Text Display
     private void createTextField(GridPane panel) {
-        TextField field = new TextField();
+        TextField field = new TextField("0");
+        field.setAlignment(Pos.CENTER_RIGHT);
         panel.add(field, 0, 4, 4, 1);
+    }
+
+    //Create Text Hint
+    private void createTextHint(GridPane panel) {
+        Label label = new Label("Resize me!");
+        label.setAlignment(Pos.CENTER_RIGHT);
+        panel.add(label, 2, 6, 2, 1);
     }
 
 
@@ -95,7 +108,6 @@ public class CalculatorUI extends Application{
         for (int i = 0; i < BUTTON_LABELS.length; i++) {
             setButtonSize(panel, newButton(BUTTON_LABELS[i]), i);
         }
-        createTextField(panel);
     }
 
     //Create a new Button

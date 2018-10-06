@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-image: url("https://www.catster.com/wp-content/uploads/2017/10/A-kitten-meowing-with-his-mouth-open.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-font-family: "Tahoma";
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-text-fill: #e9ffec;
+    -fx-background-color: rgb(102, 207, 124);
+
+}
+.button:hover {
+    -fx-background-color: #057434;
+}
