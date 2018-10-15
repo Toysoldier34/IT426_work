@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import launch.Controller;
 
 /**
  * This class provides a basic UI for a calculator.
@@ -30,6 +31,8 @@ public class CalculatorUI extends Application{
     private static final int PADDING = 25 * SCALE;
     private static final int BUTTON_SMALL = 1;
     private static final int COL_WIDTH = 30 * SCALE;
+    private Controller controller = new Controller();
+    private static TextField field = new TextField("0");
     private static final String[] BUTTON_LABELS = new String[]{
             "7", "8", "9", "+",
             "4", "5", "6", "-",
@@ -68,6 +71,7 @@ public class CalculatorUI extends Application{
         createAllButtons(panel);
         createTextField(panel);
         createTextHint(panel);
+        //TODO Add in "Hardcore/Scientific Mode" when window resized for "hidden" extra credit buttons
         return new Scene(panel, WIN_WIDTH, WIN_HEIGHT);
     }
 
@@ -77,6 +81,7 @@ public class CalculatorUI extends Application{
         panel.setVgap(V_GAP);
         panel.setPadding(new Insets(PADDING));
         panel.getStylesheets().add("userinterface/CalculatorStyles.css");
+        field.setEditable(false);
         //panel.setGridLinesVisible(true);
     }
 
@@ -90,9 +95,13 @@ public class CalculatorUI extends Application{
 
     //Create Text Display
     private void createTextField(GridPane panel) {
-        TextField field = new TextField("0");
         field.setAlignment(Pos.CENTER_RIGHT);
         panel.add(field, 0, 4, 4, 1);
+    }
+
+    //Update Text Display
+    public static void updateTextField(String string) {
+        field.setText(string);
     }
 
     //Create Text Hint
@@ -130,7 +139,12 @@ public class CalculatorUI extends Application{
     private void addButtonToPanel(GridPane panel, Button button, int buttonPositionNum, int cSpan, int rSpan) {
         panel.add(button, buttonPositionNum % TOTAL_COLS, buttonPositionNum / TOTAL_COLS, cSpan, rSpan);
         setMaxButtonWidth(button);
+        controller.setButtonEvent(button, field);
     }
+
+
+
+
 
     //Sets button width to max value
     private void setMaxButtonWidth(Button button) {
