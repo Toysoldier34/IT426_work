@@ -24,16 +24,17 @@ public class CalculatorUI extends Application{
 
     private static final int SCALE = 1;
     private static final int TOTAL_COLS = 4;
-    private static final int WIN_WIDTH = 200 * SCALE;
-    private static final int WIN_HEIGHT = 225 * SCALE;
+    private static final int WIN_WIDTH = 220 * SCALE;
+    private static final int WIN_HEIGHT = 250 * SCALE;
     private static final int H_GAP = 10 * SCALE;
     private static final int V_GAP = 10 * SCALE;
     private static final int PADDING = 25 * SCALE;
     private static final int BUTTON_SMALL = 1;
-    private static final int COL_WIDTH = 30 * SCALE;
+    private static final int COL_WIDTH = 35 * SCALE;
     private Controller controller = new Controller();
     private static TextField field = new TextField("0");
     private static final String[] BUTTON_LABELS = new String[]{
+            "√", "^", "%", "C",
             "7", "8", "9", "+",
             "4", "5", "6", "-",
             "1", "2", "3", "*",
@@ -59,7 +60,7 @@ public class CalculatorUI extends Application{
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setScene(assembleScene());
-        primaryStage.setTitle("Mathless Calculator");
+        primaryStage.setTitle("Kitty Calculator");
         primaryStage.show();
     }
 
@@ -96,7 +97,7 @@ public class CalculatorUI extends Application{
     //Create Text Display
     private void createTextField(GridPane panel) {
         field.setAlignment(Pos.CENTER_RIGHT);
-        panel.add(field, 0, 4, 4, 1);
+        panel.add(field, 0, 5, 4, 1);
     }
 
     //Update Text Display

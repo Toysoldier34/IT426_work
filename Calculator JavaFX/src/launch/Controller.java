@@ -26,7 +26,6 @@ public class Controller {
         return currentField;
     }
 
-
     private static boolean isNumeric(String strNum) {
         try {
             Double.parseDouble(strNum);
@@ -36,13 +35,14 @@ public class Controller {
         }
     }
 
-
     public void setButtonEvent(Button button, TextField field) {
         String buttonText = button.getText();
-        if (buttonText.equals("Enter")){
-            setEnterEvent(button, field);
-        } else if (isNumeric(buttonText)) {
+        if (isNumeric(buttonText)){
             setNumberEvent(button, field);
+        } else if (buttonText.equals("Enter")) {
+            setEnterEvent(button, field);
+        } else if (buttonText.equals("C")){
+            setClearEvent(button, field);
         } else {
             setOperandEvent(button, field);
         }
@@ -59,9 +59,15 @@ public class Controller {
     private void setEnterEvent(Button button, TextField field) {
         button.setOnAction(event -> {
             double answer = calculateAnswer(fieldNumber(field));
-            System.out.println("Answer: " + answer + " | getOperator:" + calculator.getOperator() + " | field.getText:" + field.getText());
             setOperator(answer);
             displayNewNumber(Double.toString(answer));
+        });
+    }
+
+    //Adds click event to given button
+    private void setClearEvent(Button button, TextField field) {
+        button.setOnAction(event -> {
+            clearDisplay();
         });
     }
 
@@ -70,24 +76,20 @@ public class Controller {
         button.setOnAction(event -> {
             setOperand(button.getText());
             setOperator(field);
-            displayNewNumber(DEFAULT_DISPLAY_NUMBER);
+            clearDisplay();
         });
     }
 
-    private void setOperand(String operand) {
-        calculator.setOperand(operand.charAt(0));
-    }
-
-    private void setOperator(TextField field) {
-        setOperator(fieldNumber(field));
-    }
-
-    private double fieldNumber(TextField field) {
-        return Double.parseDouble(field.getText());
+    private void clearDisplay() {
+        displayNewNumber(DEFAULT_DISPLAY_NUMBER);
     }
 
     private char operand() {
         return calculator.getOperand();
+    }
+
+    private void setOperand(String operand) {
+        calculator.setOperand(operand.charAt(0));
     }
 
     public double operator() {
@@ -98,6 +100,16 @@ public class Controller {
         calculator.setOperator(operator);
     }
 
+    private void setOperator(TextField field) {
+        setOperator(fieldNumber(field));
+    }
+
+    private double fieldNumber(TextField field) {
+        return Double.parseDouble(field.getText());
+    }
+
+
+
     public double calculateAnswer(double newOperator) {
         double storedOperator = operator();
         switch (operand()) {
@@ -105,6 +117,9 @@ public class Controller {
             case '-':  return storedOperator - newOperator;
             case '*':  return storedOperator * newOperator;
             case '/':  return storedOperator / divideZeroPrevention(newOperator);
+            case '√':  return Math.sqrt(newOperator);
+            case '^':  return Math.pow(storedOperator, newOperator);
+            case '%':  return storedOperator % newOperator;
         }
         return 0;
     }
