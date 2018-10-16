@@ -4,9 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Calculator JavaFX.iml" filepath="$PROJECT_DIR$/Calculator JavaFX.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ColorsProgram/ColorsProgram.iml" filepath="$PROJECT_DIR$/../ColorsProgram/ColorsProgram.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ColorsProgram/ColorsProgram1.iml" filepath="$PROJECT_DIR$/../ColorsProgram/ColorsProgram1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../Java FX Intro/Java FX Intro.iml" filepath="$PROJECT_DIR$/../Java FX Intro/Java FX Intro.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../JavaFXControls/JavaFXControls.iml" filepath="$PROJECT_DIR$/../JavaFXControls/JavaFXControls.iml" />
     </modules>
   </component>
 </project>

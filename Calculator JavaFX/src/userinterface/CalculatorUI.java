@@ -1,6 +1,5 @@
 package userinterface;
 
-import calculator.Calculator;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,6 +30,7 @@ public class CalculatorUI extends Application{
     private static final int PADDING = 25 * SCALE;
     private static final int BUTTON_SMALL = 1;
     private static final int COL_WIDTH = 35 * SCALE;
+    private static final String CALCULATOR_STYLES_CSS = "userinterface/CalculatorStyles.css";
     private Controller controller = new Controller();
     private static TextField field = new TextField("0");
     private static final String[] BUTTON_LABELS = new String[]{
@@ -72,7 +72,6 @@ public class CalculatorUI extends Application{
         createAllButtons(panel);
         createTextField(panel);
         createTextHint(panel);
-        //TODO Add in "Hardcore/Scientific Mode" when window resized for "hidden" extra credit buttons
         return new Scene(panel, WIN_WIDTH, WIN_HEIGHT);
     }
 
@@ -81,9 +80,7 @@ public class CalculatorUI extends Application{
         panel.setHgap(H_GAP);
         panel.setVgap(V_GAP);
         panel.setPadding(new Insets(PADDING));
-        panel.getStylesheets().add("userinterface/CalculatorStyles.css");
-        field.setEditable(false);
-        //panel.setGridLinesVisible(true);
+        panel.getStylesheets().add(CALCULATOR_STYLES_CSS);
     }
 
     //Column Constraints
@@ -97,10 +94,14 @@ public class CalculatorUI extends Application{
     //Create Text Display
     private void createTextField(GridPane panel) {
         field.setAlignment(Pos.CENTER_RIGHT);
+        field.setEditable(false);
         panel.add(field, 0, 5, 4, 1);
     }
 
-    //Update Text Display
+    /**
+     * changes text in display to given string(only numbers)
+     * @param string number to display
+     */
     public static void updateTextField(String string) {
         field.setText(string);
     }
@@ -132,20 +133,16 @@ public class CalculatorUI extends Application{
             if (button.getText().equals("Enter")) {
                 buttonSize = 2;
             }
-            addButtonToPanel(panel, button, buttonPositionNum, buttonSize, BUTTON_SMALL);
+            addButtonToPanel(panel, button, buttonPositionNum, buttonSize);
         }
     }
 
     //Adds button to panel
-    private void addButtonToPanel(GridPane panel, Button button, int buttonPositionNum, int cSpan, int rSpan) {
-        panel.add(button, buttonPositionNum % TOTAL_COLS, buttonPositionNum / TOTAL_COLS, cSpan, rSpan);
+    private void addButtonToPanel(GridPane panel, Button button, int buttonPositionNum, int span) {
+        panel.add(button, buttonPositionNum % TOTAL_COLS, buttonPositionNum / TOTAL_COLS, span, BUTTON_SMALL);
         setMaxButtonWidth(button);
         controller.setButtonEvent(button, field);
     }
-
-
-
-
 
     //Sets button width to max value
     private void setMaxButtonWidth(Button button) {

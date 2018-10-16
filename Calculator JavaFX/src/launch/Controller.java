@@ -7,15 +7,14 @@ import userinterface.CalculatorUI;
 
 public class Controller {
 
-
-    public static final String DEFAULT_DISPLAY_NUMBER = "0";
+    private static final String DEFAULT_DISPLAY_NUMBER = "0";
     private Calculator calculator = new Calculator();
 
-    public void appendNumber(TextField field, String number) {
+    private void appendNumber(TextField field, String number) {
         displayNewNumber(clearZero(field.getText()) + number);
     }
 
-    public void displayNewNumber(String newNumber) {
+    private void displayNewNumber(String newNumber) {
         CalculatorUI.updateTextField(newNumber);
     }
 
@@ -42,7 +41,7 @@ public class Controller {
         } else if (buttonText.equals("Enter")) {
             setEnterEvent(button, field);
         } else if (buttonText.equals("C")){
-            setClearEvent(button, field);
+            setClearEvent(button);
         } else {
             setOperandEvent(button, field);
         }
@@ -50,9 +49,7 @@ public class Controller {
 
     //Adds click event to given button
     private void setNumberEvent(Button button, TextField field) {
-        button.setOnAction(event -> {
-            appendNumber(field, button.getText());
-        });
+        button.setOnAction(event -> appendNumber(field, button.getText()));
     }
 
     //Adds click event to given button
@@ -65,10 +62,8 @@ public class Controller {
     }
 
     //Adds click event to given button
-    private void setClearEvent(Button button, TextField field) {
-        button.setOnAction(event -> {
-            clearDisplay();
-        });
+    private void setClearEvent(Button button) {
+        button.setOnAction(event -> clearDisplay());
     }
 
     //Adds click event to given button
@@ -92,7 +87,7 @@ public class Controller {
         calculator.setOperand(operand.charAt(0));
     }
 
-    public double operator() {
+    private double operator() {
         return calculator.getOperator();
     }
 
@@ -108,9 +103,7 @@ public class Controller {
         return Double.parseDouble(field.getText());
     }
 
-
-
-    public double calculateAnswer(double newOperator) {
+    private double calculateAnswer(double newOperator) {
         double storedOperator = operator();
         switch (operand()) {
             case '+':  return storedOperator + newOperator;
@@ -128,6 +121,5 @@ public class Controller {
         if (newOperator == 0.0) return 1.0;
         return newOperator;
     }
-
 
 }
