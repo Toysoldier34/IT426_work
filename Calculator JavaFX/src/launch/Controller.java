@@ -5,6 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import userinterface.CalculatorUI;
 
+/**
+ * Controls calculator and handles the logic behind each button
+ */
 public class Controller {
 
     private static final String DEFAULT_DISPLAY_NUMBER = "0";
@@ -34,6 +37,12 @@ public class Controller {
         }
     }
 
+
+    /**
+     * determines type of given button then assigns the the correct event
+     * @param button button to add event to
+     * @param field text field display
+     */
     public void setButtonEvent(Button button, TextField field) {
         String buttonText = button.getText();
         if (isNumeric(buttonText)){
@@ -96,7 +105,7 @@ public class Controller {
     }
 
     private void setOperator(TextField field) {
-        setOperator(fieldNumber(field));
+        if (fieldNumber(field) != 0) setOperator(fieldNumber(field));
     }
 
     private double fieldNumber(TextField field) {

@@ -9,6 +9,7 @@ import userinterface.CalculatorUI;
  * @version 1.0
  */
 public class Launcher {
+
     /**
      * Main method to launch Calculator
      * @param args no parameters
