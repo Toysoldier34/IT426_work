@@ -51,6 +51,8 @@ public class Controller {
             setEnterEvent(button, field);
         } else if (buttonText.equals("C")){
             setClearEvent(button);
+        } else if (buttonText.equals("√")){
+            setSqrtEvent(button, field);
         } else {
             setOperandEvent(button, field);
         }
@@ -63,11 +65,21 @@ public class Controller {
 
     //Adds click event to given button
     private void setEnterEvent(Button button, TextField field) {
+        button.setOnAction(event -> calculate(field));
+    }
+
+    //Adds click event to given button
+    private void setSqrtEvent(Button button, TextField field) {
         button.setOnAction(event -> {
-            double answer = calculateAnswer(fieldNumber(field));
-            setOperator(answer);
-            displayNewNumber(Double.toString(answer));
+            setOperand("√");
+            calculate(field);
         });
+    }
+
+    private void calculate(TextField field) {
+        double answer = calculateAnswer(fieldNumber(field));
+        setOperator(answer);
+        displayNewNumber(Double.toString(answer));
     }
 
     //Adds click event to given button
@@ -77,7 +89,9 @@ public class Controller {
 
     //Adds click event to given button
     private void setOperandEvent(Button button, TextField field) {
+        System.out.println(button.getText());
         button.setOnAction(event -> {
+            System.out.println(button.getText());
             setOperand(button.getText());
             setOperator(field);
             clearDisplay();
@@ -114,6 +128,7 @@ public class Controller {
 
     private double calculateAnswer(double newOperator) {
         double storedOperator = operator();
+        System.out.println(newOperator +" SQRT: " + Math.sqrt(newOperator));
         switch (operand()) {
             case '+':  return storedOperator + newOperator;
             case '-':  return storedOperator - newOperator;
