@@ -2,6 +2,8 @@ package calculator;
 
 /**
  * stores operator and operand values
+ * @author Tony Thompson
+ * @version 1.0
  */
 public class Calculator {
 
@@ -42,5 +44,18 @@ public class Calculator {
      */
     public void setOperand(char operand) {
         this.operand = operand;
+    }
+
+
+    /**
+     * Returns the stored operand and operator
+     * @return String of stored values
+     */
+    @Override
+    public String toString() {
+        return "Calculator{" +
+                "operator=" + operator +
+                ", operand=" + operand +
+                '}';
     }
 }

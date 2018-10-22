@@ -7,6 +7,8 @@ import userinterface.CalculatorUI;
 
 /**
  * Controls calculator and handles the logic behind each button
+ * @author Tony Thompson
+ * @version 1.0
  */
 public class Controller {
 
@@ -119,7 +121,7 @@ public class Controller {
     }
 
     private void setOperator(TextField field) {
-        if (fieldNumber(field) != 0) setOperator(fieldNumber(field));
+        if (fieldNumber(field) != 0) { setOperator(fieldNumber(field)); }
     }
 
     private double fieldNumber(TextField field) {
@@ -128,7 +130,6 @@ public class Controller {
 
     private double calculateAnswer(double newOperator) {
         double storedOperator = operator();
-        System.out.println(newOperator +" SQRT: " + Math.sqrt(newOperator));
         switch (operand()) {
             case '+':  return storedOperator + newOperator;
             case '-':  return storedOperator - newOperator;
@@ -142,8 +143,13 @@ public class Controller {
     }
 
     private double divideZeroPrevention(double newOperator) {
-        if (newOperator == 0.0) return 1.0;
+        if (newOperator == 0.0) { return 1.0; }
         return newOperator;
     }
 
+
+    @Override
+    public String toString() {
+        return "This controls the calculator and defaults display to 0";
+    }
 }

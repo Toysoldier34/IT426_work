@@ -100,10 +100,10 @@ public class CalculatorUI extends Application{
 
     /**
      * changes text in display to given string(only numbers)
-     * @param string number to display
+     * @param newDisplayText number to display
      */
-    public static void updateTextField(String string) {
-        field.setText(string);
+    public static void updateTextField(String newDisplayText) {
+        field.setText(newDisplayText);
     }
 
     //Create Text Hint
@@ -149,4 +149,13 @@ public class CalculatorUI extends Application{
         button.setPrefWidth(Double.MAX_VALUE);
     }
 
+
+    /**
+     * returns SCALE setting
+     * @return Scale value
+     */
+    @Override
+    public String toString() {
+        return ""+SCALE;
+    }
 }
